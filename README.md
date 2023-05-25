@@ -9,7 +9,9 @@
 2. Clone the repo
 3. Open a command line and navigate to the project folder
 4. Run `composer install`
+5. Rename the file `.env.example` to just `.env`
 5. Run `php artisan key:generate`
+6. Run `php artisan migrate` and create the database when asked
 6. Run `php artisan serve`
 7. Run migration related commands as needed
 
