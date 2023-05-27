@@ -21,7 +21,8 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        //
+        //$this->authorize('create', Book::class); //Should only logged-in users create meetings?
+        return view('meetings.create');
     }
 
     /**
@@ -29,7 +30,12 @@ class MeetingController extends Controller
      */
     public function store(StoreMeetingRequest $request)
     {
-        //
+        $data = $request->validated();
+        //$this->authorize('modify', Meeting::class); //Who should be able to modify this meeting?
+        $user = auth()->user();
+        $meeting = $user->meetings()->create($data);
+
+        return redirect()->route('meetings.show', ['meeting' => $meeting->id]);
     }
 
     /**
@@ -37,7 +43,9 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-        //
+        return view('meetings.show', [
+            'meeting' => $meeting,
+        ]);
     }
 
     /**
