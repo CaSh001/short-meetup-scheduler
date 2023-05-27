@@ -12,8 +12,8 @@
 5. Rename the file `.env.example` to just `.env`
 5. Run `php artisan key:generate`
 6. Run `php artisan migrate` and create the database when asked
+7. Run other migration related commands as needed
 6. Run `php artisan serve`
-7. Run migration related commands as needed
 
 
 ## About Laravel
