@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('availabilities', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+
+            $table->unsignedBigInteger('meeting_id');
+            $table->foreign('meeting_id')->references('id')->on('meetings');
         });
     }
 
