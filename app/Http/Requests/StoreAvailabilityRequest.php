@@ -11,7 +11,7 @@ class StoreAvailabilityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,6 +22,7 @@ class StoreAvailabilityRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'meeting_id' => 'required',
             //
         ];
     }

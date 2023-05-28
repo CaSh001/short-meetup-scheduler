@@ -21,7 +21,7 @@ class AvailabilityController extends Controller
      */
     public function create()
     {
-        //
+        return view('availabilities.create');
     }
 
     /**
@@ -29,7 +29,13 @@ class AvailabilityController extends Controller
      */
     public function store(StoreAvailabilityRequest $request)
     {
-        //
+        $data = $request->validated();
+        //$this->authorize('modify', Availability::class); //Who should be able to modify this meeting?
+        $user = auth()->user();
+        $meeting = Meeting::find($data['meeting_id']);
+        $meeting->availabilities()->create($data);
+
+        return redirect()->route('meetings.show', ['meeting' => $meeting->id]);
     }
 
     /**
