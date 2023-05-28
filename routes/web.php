@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\AvailabilityController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Meeting;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('main', [
+        'numberOfUsers' => User::count(),
+        'numberOfMeetings' => Meeting::count(),
+        //'numberOfActiveRentals' => Borrow::where('status','=','ACCEPTED')->get()->count(),
+    ]);
+})->name('main');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
