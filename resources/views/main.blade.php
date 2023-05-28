@@ -8,8 +8,14 @@
       <p class="lead">In this application, there are:</p>
       <p class="lead">{{ $numberOfUsers }} users,</p>
       <p class="lead">{{ $numberOfMeetings }} meetings,</p>
+      @guest
+        <p class="lead">Log in to host a meeting!</p>
+      @endguest
+      @auth
+      <a class="lead" href="{{ route('meetings.create') }}">Create Meeting</a>
+      @endauth
       <hr class="my-4">
     </div>
-
+  
 
 @endsection

@@ -19,8 +19,8 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           @auth
-            <a class="nav-item nav-link" href="/books/create">New meeting</a>
-            <a class="nav-item nav-link" href="/borrows">My meetings</a>
+            <a class="nav-item nav-link" href="/meetings/create">New meeting</a>
+            <a class="nav-item nav-link" href="/meetings">My meetings</a>
             <a class="nav-item nav-link" href="/profile">Profile</a>
           @endauth
         </div>
