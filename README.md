@@ -7,6 +7,7 @@
     - https://getcomposer.org/download/
 
 2. Clone the repo
+3. In your php folder, in the file `php.ini`, make sure the line `;extension=fileinfo` is uncommented, like this: `extension=fileinfo`
 3. Open a command line and navigate to the project folder
 4. Run `composer install`
 5. Rename the file `.env.example` to just `.env`
