@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('availabilities', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name', 255);
 
 
             $table->unsignedBigInteger('meeting_id');

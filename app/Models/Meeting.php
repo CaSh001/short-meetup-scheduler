@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Meeting extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'name',
+    ];
 
     public function user(): BelongsTo
     {

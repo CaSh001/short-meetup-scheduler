@@ -34,12 +34,13 @@ class AvailabilityController extends Controller
     public function store(StoreAvailabilityRequest $request, $meeting)
     {
         $data = $request->validated();
-        //$this->authorize('modify', Availability::class); //Who should be able to modify this meeting?
+
         $user = auth()->user();
-        $meeting = Meeting::find($meeting);
+        $meeting = Meeting::FindOrFail($meeting);
+        //dd($meeting);
         $meeting->availabilities()->create($data);
 
-        return redirect()->route('meetings.show', ['meeting' => $meeting->id]);
+        return redirect()->route('meetings.show', ['meeting' => $meeting]);
     }
 
     /**

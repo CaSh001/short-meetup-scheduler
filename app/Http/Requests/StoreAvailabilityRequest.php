@@ -22,7 +22,7 @@ class StoreAvailabilityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'meeting_id' => 'required',
+            'name' => 'required|string|max:255',
             //
         ];
     }
