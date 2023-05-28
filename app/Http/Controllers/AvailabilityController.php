@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Availability;
+use App\Models\Meeting;
 use App\Http\Requests\StoreAvailabilityRequest;
 use App\Http\Requests\UpdateAvailabilityRequest;
 
@@ -19,20 +20,23 @@ class AvailabilityController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($meeting)
     {
-        return view('availabilities.create');
+        $meeting = Meeting::findOrFail($meeting);
+
+        return view('availabilities.create', ['meetingId' => $meeting->id]);
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAvailabilityRequest $request)
+    public function store(StoreAvailabilityRequest $request, $meeting)
     {
         $data = $request->validated();
         //$this->authorize('modify', Availability::class); //Who should be able to modify this meeting?
         $user = auth()->user();
-        $meeting = Meeting::find($data['meeting_id']);
+        $meeting = Meeting::find($meeting);
         $meeting->availabilities()->create($data);
 
         return redirect()->route('meetings.show', ['meeting' => $meeting->id]);

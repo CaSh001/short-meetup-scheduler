@@ -32,5 +32,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('meetings', MeetingController::class);
 Route::resource('availabilities', AvailabilityController::class);
+Route::get('/availabilities/create/{meeting}', [AvailabilityController::class, 'create'])->name('availabilities.create');
 
 require __DIR__.'/auth.php';

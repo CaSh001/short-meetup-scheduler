@@ -3,7 +3,7 @@
 @section('content')
     <div class="container py-3">
       <h2>Submit your availability for this meeting</h2>
-      <form action="{{ route('availabilities.store') }}" method="POST">
+      <form action="{{ route('availabilities.store', ['meeting' => $meetingId]) }}" method="POST">
         {{-- HTTP: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS,  --}}
         @csrf
         
