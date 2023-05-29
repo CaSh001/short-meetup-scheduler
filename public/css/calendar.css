@@ -38,3 +38,7 @@ availability-table {
 .availability-cell.busy {
     background-color: #f44336;
 }
+
+.side-label {
+    user-select: none;
+}

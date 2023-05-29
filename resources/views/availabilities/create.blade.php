@@ -9,19 +9,13 @@
         let isLeftMouseDown = false;
         let isRightMouseDown = false;
 
-        function handleCellClick(cell, isLeftClick, toggle=false) {
+        function handleCellClick(cell, isLeftClick) {
             if (isLeftClick) {
                 cell.classList.remove('busy');
-                cell.classList.add('available');
-                if(toggle){
-                  cell.classList.toggle('available');
-                }
+                cell.classList.toggle('available');
             } else {
                 cell.classList.remove('available');
-                cell.classList.add('busy');
-                if(toggle){
-                  cell.classList.toggle('busy');
-                }
+                cell.classList.toggle('busy');
             }
 
             if (selectedCells.includes(cell)) {
@@ -39,7 +33,7 @@
                     handleCellClick(cell, true);
                 } else if (event.button === 2) {
                     isRightMouseDown = true;
-                    handleCellClick(cell, false, true);
+                    handleCellClick(cell, false);
                 }
             });
 
@@ -96,7 +90,7 @@
                   <tr>
                       <th></th>
                       @foreach ($days as $day)
-                      <th>{{ $day }}</th>
+                      <th class="side-label">{{ $day }}</th>
                       @endforeach
                   </tr>
               </thead>
@@ -105,7 +99,7 @@
                   <tr>
                       <td>{{ $hour }}</td>
                       @foreach ($days as $day)
-                      <td class="availability-cell"></td>
+                      <td class="availability-cell side-label"></td>
                       @endforeach
                   </tr>
                   @endforeach
