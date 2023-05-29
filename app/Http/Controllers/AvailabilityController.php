@@ -22,10 +22,11 @@ class AvailabilityController extends Controller
      */
     public function create($meeting)
     {
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $hours = range(0, 23);
         $meeting = Meeting::findOrFail($meeting);
 
-        return view('availabilities.create', ['meetingId' => $meeting->id]);
-
+        return view('availabilities.create', ['meetingId' => $meeting->id, 'days' => $days, 'hours' => $hours]);
     }
 
     /**

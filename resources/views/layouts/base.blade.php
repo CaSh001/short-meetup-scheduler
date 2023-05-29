@@ -7,6 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/united/bootstrap.min.css">
+    <link rel="stylesheet" href={{ URL::asset('css/calendar.css'); }} >
+    
+
 
     <title>Short Meetup Scheduler</title>
   </head>

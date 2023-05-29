@@ -1,0 +1,40 @@
+/* Custom CSS */
+
+/* Styling for available cells */
+.available {
+    background-color: green;
+    color: green;
+}
+
+/* Styling for busy cells */
+.busy {
+    background-color: red;
+    color: red;
+}
+
+availability-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.availability-table th,
+.availability-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.availability-cell {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.availability-cell.available {
+    background-color: #4caf50;
+}
+
+.availability-cell.busy {
+    background-color: #f44336;
+}
