@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Meeting;
 use App\Http\Requests\StoreMeetingRequest;
 use App\Http\Requests\UpdateMeetingRequest;
+use Illuminate\Http\Request;
+
 
 class MeetingController extends Controller
 {
@@ -71,5 +73,21 @@ class MeetingController extends Controller
     public function destroy(Meeting $meeting)
     {
         //
+    }
+
+    public function updateFinalizedTime(Request $request)
+    {
+        $day = $request->input('day');
+        $hour = $request->input('hour');
+        $meetingId = $request->input('meetingId');
+
+        // Find the meeting by ID
+        $meeting = Meeting::findOrFail($meetingId);
+
+        // Update the "finalized time" in the model
+        $meeting->finalized_time = "$day, $hour";
+        $meeting->save();
+
+        return response()->json(['success' => true]);
     }
 }

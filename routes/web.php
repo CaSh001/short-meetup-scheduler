@@ -37,8 +37,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('meetings', MeetingController::class);
+Route::patch('/meetings/{meeting}/update-finalized-time', [MeetingController::class, 'updateFinalizedTime'])->name('meetings.updateFinalizedTime');
+
 Route::get('/availabilities/create/{meeting}', [AvailabilityController::class, 'create'])->name('availabilities.create');
 Route::post('/availabilities/store/{meeting}', [AvailabilityController::class, 'store'])->name('availabilities.store');
-//Route::resource('availabilities', AvailabilityController::class);
 
 require __DIR__.'/auth.php';

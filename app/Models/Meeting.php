@@ -13,6 +13,7 @@ class Meeting extends Model
     
     protected $fillable = [
         'name',
+        'finalized_time'
     ];
 
     public function user(): BelongsTo

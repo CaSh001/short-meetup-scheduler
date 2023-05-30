@@ -11,7 +11,7 @@ class UpdateMeetingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateMeetingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'day' => 'required',
+            'hour' => 'required',
         ];
     }
 }

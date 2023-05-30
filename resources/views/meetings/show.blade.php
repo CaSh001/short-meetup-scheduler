@@ -21,6 +21,33 @@
                 });
         });
     });
+
+
+    function selectCell(cell) {
+    var day = cell.getAttribute('data-day');
+    var hour = cell.getAttribute('data-hour');
+    var meetingId = {{$meeting->id}};
+
+    // Send an AJAX request to update the "finalized time"
+    var xhr = new XMLHttpRequest();
+    xhr.open('PATCH', '{{ route("meetings.updateFinalizedTime", ["meeting" => $meeting->id]) }}', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Handle the response or update the page if needed
+            console.log('Finalized time updated successfully');
+        }
+    };
+
+    var data = JSON.stringify({
+        day: day,
+        hour: hour,
+        meetingId: meetingId
+    });
+    xhr.send(data);
+}
+
 </script>
   <div class="container py-3">
           <p> test </p>
@@ -99,7 +126,7 @@
                               $availabilityClass = 'available';
                               }
                         @endphp
-                      <td data-day={{$day}} data-hour={{$hour}} class="availability-cell side-label {{$availabilityClass}}"></td>
+                      <td onclick="selectCell(this)" data-day={{$day}} data-hour={{$hour}} class="availability-cell side-label {{$availabilityClass}}"></td>
                       @endforeach
                   </tr>
                   @endforeach
