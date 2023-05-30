@@ -59,31 +59,46 @@
                   </tr>
               </thead>
               <tbody>
+                @php
+                  $allData = $meeting->availabilities()->pluck('availability_data');
+                  $day = 'Monday';
+                  $hour = '0';
+                  $test = $allData->filter(function ($availability) use ($day, $hour) {
+                              $availability = json_decode($availability, true);
+                              return collect($availability)->contains(function ($item) use ($day, $hour) {
+                                  return $item['day'] === $day && $item['hour'] === $hour && $item['availability'] === 'busy';
+                              });
+                          })->count();
+
+                @endphp
                   @foreach ($hours as $hour)
                   <tr>
                       <td>{{ $hour }}</td>
                       @foreach ($days as $day)
-                      @php
-                        $availabilityClass = '';
-                        $busyCount = $meeting->availabilities
-                            ->where('day', $day)
-                            ->where('hour', $hour)
-                            ->where('availability', 'busy')
-                            ->count();
+                        @php
+                          $availabilityClass = '';
 
-                        $availableCount = $meeting->availabilities
-                            ->where('day', $day)
-                            ->where('hour', $hour)
-                            ->where('availability', 'busy')
-                            ->count();
+                          $busyCount = $allData->filter(function ($availability) use ($day, $hour) {
+                              $availability = json_decode($availability, true);
+                              return collect($availability)->contains(function ($item) use ($day, $hour) {
+                                  return $item['day'] == $day && $item['hour'] == $hour && $item['availability'] == 'busy';
+                              });
+                          })->count();
 
-                          if ($busyCount > 0) {
-                            $availabilityClass = 'busy';
-                          }
-                            elseif ($availableCount > 0) {
-                            $availabilityClass = 'available';
+                          $availableCount = $allData->filter(function ($availability) use ($day, $hour) {
+                              $availability = json_decode($availability, true);
+                              return collect($availability)->contains(function ($item) use ($day, $hour) {
+                                  return $item['day'] == $day && $item['hour'] == $hour && $item['availability'] == 'available';
+                              });
+                          })->count();
+
+                            if ($busyCount > 0) {
+                              $availabilityClass = 'busy';
                             }
-                      @endphp
+                              elseif ($availableCount > 0) {
+                              $availabilityClass = 'available';
+                              }
+                        @endphp
                       <td data-day={{$day}} data-hour={{$hour}} class="availability-cell side-label {{$availabilityClass}}"></td>
                       @endforeach
                   </tr>
