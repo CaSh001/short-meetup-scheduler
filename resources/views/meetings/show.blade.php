@@ -8,7 +8,7 @@
         var inviteLink = "{{ route('availabilities.create', ['meeting' => ':meetingId']) }}";
         inviteLink = inviteLink.replace(':meetingId', meetingId);
 
-        copyInviteBtn.addEventListener('click', function() {
+        copyInviteBtn && copyInviteBtn.addEventListener('click', function() {
             navigator.clipboard.writeText(inviteLink)
                 .then(function() {
                     copyInviteBtn.textContent = 'Copied!';
@@ -24,7 +24,7 @@
 
 
     function selectCell(cell) {
-      if(cell.classList.contains('available')){
+      if(cell.classList.contains('available') && {{ Auth::user() == $meeting->user ? 1 : 0}}){
           var day = cell.getAttribute('data-day');
           var hour = cell.getAttribute('data-hour');
           var meetingId = {{$meeting->id}};
