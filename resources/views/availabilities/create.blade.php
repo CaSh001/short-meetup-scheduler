@@ -2,6 +2,35 @@
 
 @section('content')
 <script>
+
+let selectedCells = [];
+
+function toggleAvailability(cell) {
+
+    const day = cell.getAttribute('data-day');
+    const hour = cell.getAttribute('data-hour');
+    const availability = cell.classList.contains('available') ? 'available' : cell.classList.contains('busy') ? 'busy': null;
+
+
+    const cellData = { day, hour, availability };
+    const index = selectedCells.findIndex((c) => c.day === day && c.hour === hour);
+
+    if (index !== -1) {
+        selectedCells.splice(index, 1);
+    }
+
+    if (availability !== null) {
+        selectedCells.push(cellData);
+    }
+
+    updateHiddenInput();
+}
+
+function updateHiddenInput() {
+    const hiddenInput = document.getElementById('availabilityData');
+    hiddenInput.value = JSON.stringify(selectedCells);
+}
+
     document.addEventListener('DOMContentLoaded', function () {
         const cells = document.querySelectorAll('.availability-cell');
         const selectedCells = [];
@@ -18,12 +47,7 @@
                 cell.classList.toggle('busy');
             }
 
-            if (selectedCells.includes(cell)) {
-                const index = selectedCells.indexOf(cell);
-                selectedCells.splice(index, 1);
-            } else {
-                selectedCells.push(cell);
-            }
+            toggleAvailability(cell);
         }
 
         cells.forEach(function (cell) {
@@ -99,13 +123,14 @@
                   <tr>
                       <td>{{ $hour }}</td>
                       @foreach ($days as $day)
-                      <td class="availability-cell side-label"></td>
+                      <td data-day={{$day}} data-hour={{$hour}} class="availability-cell side-label"></td>
                       @endforeach
                   </tr>
                   @endforeach
               </tbody>
           </table>
         </div>
+        <input type="hidden" name="availability_data" id="availabilityData">
 
       </form>
     </div>

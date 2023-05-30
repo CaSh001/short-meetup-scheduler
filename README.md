@@ -2,18 +2,20 @@
 
 ## Simple guide to starting up locally from scratch
 
-1. Install PHP and Composer
+1. Install PHP, Composer and Node.js
     - https://www.php.net/downloads.php
     - https://getcomposer.org/download/
 
 2. Clone the repo
 3. In your php folder, in the file `php.ini`, make sure the line `;extension=fileinfo` is uncommented, like this: `extension=fileinfo`
+3. In the same file, comment out "extension=pdo_sqlite" also
 3. Open a command line and navigate to the project folder
 4. Run `composer install`
 5. Rename the file `.env.example` to just `.env`
 5. Run `php artisan key:generate`
 6. Run `php artisan migrate` and create the database when asked
 7. Run other migration related commands as needed
+7. Run `npm install` and `npm run build`
 6. Run `php artisan serve`
 
 
