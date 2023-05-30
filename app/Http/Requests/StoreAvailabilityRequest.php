@@ -23,6 +23,7 @@ class StoreAvailabilityRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'availability_data' => 'required',
             //
         ];
     }

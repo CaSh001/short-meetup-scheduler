@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 255);
+            $table->json('availability_data')->nullable();;
 
 
             $table->unsignedBigInteger('meeting_id');

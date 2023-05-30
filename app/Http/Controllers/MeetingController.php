@@ -43,9 +43,10 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-        return view('meetings.show', [
-            'meeting' => $meeting,
-        ]);
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $hours = range(0, 23);
+
+        return view('meetings.show', ['meeting' => $meeting, 'days' => $days, 'hours' => $hours]);
     }
 
     /**

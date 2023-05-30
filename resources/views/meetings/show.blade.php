@@ -47,6 +47,51 @@
         <p>So far no attendees have joined this meeting.</p>
         @endif
 
+
+        <div id="availability-calendar">
+              <table class="availability-table">
+              <thead>
+                  <tr>
+                      <th></th>
+                      @foreach ($days as $day)
+                      <th class="side-label">{{ $day }}</th>
+                      @endforeach
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach ($hours as $hour)
+                  <tr>
+                      <td>{{ $hour }}</td>
+                      @foreach ($days as $day)
+                      @php
+                        $availabilityClass = '';
+                        $busyCount = $meeting->availabilities
+                            ->where('day', $day)
+                            ->where('hour', $hour)
+                            ->where('availability', 'busy')
+                            ->count();
+
+                        $availableCount = $meeting->availabilities
+                            ->where('day', $day)
+                            ->where('hour', $hour)
+                            ->where('availability', 'busy')
+                            ->count();
+
+                          if ($busyCount > 0) {
+                            $availabilityClass = 'busy';
+                          }
+                            elseif ($availableCount > 0) {
+                            $availabilityClass = 'available';
+                            }
+                      @endphp
+                      <td data-day={{$day}} data-hour={{$hour}} class="availability-cell side-label {{$availabilityClass}}"></td>
+                      @endforeach
+                  </tr>
+                  @endforeach
+              </tbody>
+          </table>
+        </div>
+
         
         </div>
             </div>

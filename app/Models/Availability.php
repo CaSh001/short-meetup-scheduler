@@ -12,6 +12,11 @@ class Availability extends Model
 
     protected $fillable = [
         'name',
+        'availability_data',
+    ];
+
+    protected $casts = [
+        'availability_data' => 'array',
     ];
 
     public function meeting(): BelongsTo

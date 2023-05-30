@@ -38,7 +38,7 @@ class AvailabilityController extends Controller
 
         $user = auth()->user();
         $meeting = Meeting::FindOrFail($meeting);
-        //dd($meeting);
+
         $meeting->availabilities()->create($data);
 
         return redirect()->route('meetings.show', ['meeting' => $meeting]);
