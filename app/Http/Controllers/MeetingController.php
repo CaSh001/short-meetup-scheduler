@@ -15,7 +15,10 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $meetings = $user->meetings()->withCount('availabilities')->get();
+    
+        return view('meetings.index', compact('meetings'));
     }
 
     /**
