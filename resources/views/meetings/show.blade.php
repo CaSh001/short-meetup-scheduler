@@ -9,16 +9,22 @@
         inviteLink = inviteLink.replace(':meetingId', meetingId);
 
         copyInviteBtn && copyInviteBtn.addEventListener('click', function() {
-            navigator.clipboard.writeText(inviteLink)
+            if(false) {
+                navigator.clipboard.writeText(inviteLink)
                 .then(function() {
                     copyInviteBtn.textContent = 'Copied!';
                     setTimeout(function() {
-                        copyInviteBtn.textContent = 'Copy Invite to Clipboard';
+                        copyInviteBtn.textContent = 'Copy Invite';
                     }, 2000);
                 })
                 .catch(function(error) {
                     console.error('Failed to copy invite link: ', error);
                 });
+            }
+            else{
+                alert("Here is your invite link:   " + inviteLink);
+            }
+            
         });
     });
 
@@ -53,7 +59,6 @@
 
 </script>
   <div class="container py-3">
-          <p> test </p>
             <div class="card h-100">
               <div class="card-body">
                 <h5 class="card-title">{{$meeting->name}}</h5>
@@ -62,7 +67,7 @@
             @auth
             @if (Auth::user()->id == $meeting->user->id)
               <p>You are the host of this meeting.</p>
-              <button id="copy-invite-btn" class="btn btn-primary">Copy Invite to Clipboard</button>
+              <button id="copy-invite-btn" class="btn btn-primary">Copy Invite</button>
             @endif
           @endauth
 
